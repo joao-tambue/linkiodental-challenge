@@ -1,1 +1,7 @@
 node_modules
+dist
+.github
+.env
+.env.local
+.vscode
+.DS_Store
