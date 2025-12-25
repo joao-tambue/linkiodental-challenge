@@ -12,13 +12,12 @@ const userSchema = new Schema<IUser>({
 });
 
 // Hash da senha antes de salvar
-userSchema.pre('save', async function(next) {
-  if (!this.isModified('password')) return next();
+userSchema.pre('save', async function(this: any) {
+  if (!this.isModified('password')) return;
   this.password = await bcrypt.hash(this.password, 10);
-  next();
 });
 
-userSchema.methods.comparePassword = async function(password: string) {
+userSchema.methods.comparePassword = async function(this: any, password: string) {
   return bcrypt.compare(password, this.password);
 };
 
