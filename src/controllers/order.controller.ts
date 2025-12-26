@@ -7,12 +7,12 @@ export const createOrder = async (req: Request, res: Response) => {
 
     // Regra de negócio: serviços obrigatórios e valor total > 0
     if (!services || !Array.isArray(services) || services.length === 0) {
-      return res.status(400).json({ message: 'Order must have at least one service.' });
+      return res.status(400).json({ message: 'O pedido deve ter pelo menos um serviço.' });
     }
 
     const totalValue = services.reduce((acc, s) => acc + (s.value || 0), 0);
     if (totalValue <= 0) {
-      return res.status(400).json({ message: 'Total value of services must be greater than 0.' });
+      return res.status(400).json({ message: 'O valor total dos serviços deve ser maior que 0.' });
     }
 
     const order = new Order({
@@ -27,7 +27,7 @@ export const createOrder = async (req: Request, res: Response) => {
     await order.save();
     res.status(201).json(order);
   } catch (err) {
-    res.status(400).json({ message: 'Error creating order', error: err });
+    res.status(400).json({ message: 'Erro ao criar pedido', error: err });
   }
 };
 
@@ -52,24 +52,24 @@ export const advanceOrder = async (req: Request, res: Response) => {
 
   try {
     const order = await Order.findById(id);
-    if (!order) return res.status(404).json({ message: 'Order not found' });
+    if (!order) return res.status(404).json({ message: 'Pedido não encontrado' });
 
     if (order.status === 'DELETED') {
-      return res.status(400).json({ message: 'Cannot advance a deleted order.' });
+      return res.status(400).json({ message: 'Não é possível avançar um pedido excluído.' });
     }
 
     const flow = ['CREATED', 'ANALYSIS', 'COMPLETED'] as const;
     const currentIndex = flow.indexOf(order.state);
 
     if (currentIndex === -1 || currentIndex === flow.length - 1) {
-      return res.status(400).json({ message: 'Order cannot advance further.' });
+      return res.status(400).json({ message: 'O pedido não pode avançar mais.' });
     }
 
     order.state = flow[currentIndex + 1];
     await order.save();
 
-    res.json({ message: `Order advanced to ${order.state}`, order });
+    res.json({ message: `Pedido avançado para ${order.state}`, order });
   } catch (err) {
-    res.status(500).json({ message: 'Error advancing order', error: err });
+    res.status(500).json({ message: 'Erro ao avançar o pedido', error: err });
   }
 };

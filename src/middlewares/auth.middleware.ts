@@ -5,7 +5,7 @@ import User from '../models/user';
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ message: 'Token missing' });
+    return res.status(401).json({ message: 'Token ausente' });
   }
 
   const token = authHeader.split(' ')[1];
@@ -13,10 +13,10 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
   try {
     const decoded: any = jwt.verifyToken(token);
     const user = await User.findById(decoded.id);
-    if (!user) return res.status(401).json({ message: 'User not found' });
+    if (!user) return res.status(401).json({ message: 'Usuário não encontrado' });
     req.user = user;
     next();
   } catch (err) {
-    res.status(401).json({ message: 'Invalid token' });
+    res.status(401).json({ message: 'Token inválido' });
   }
 };

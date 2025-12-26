@@ -13,7 +13,7 @@ describe('Order business rules', () => {
     try {
       await order.save();
     } catch (err: any) {
-      expect(err.message).toContain('Order must have at least one service');
+      expect(err.message).toContain('O pedido deve ter pelo menos um serviço');
     }
   });
 
