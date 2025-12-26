@@ -1,47 +1,47 @@
 # Linkio Challenge
 
-A small Express + TypeScript API demonstrating authentication and order management using JWT, MongoDB and bcrypt. This repository is a coding challenge scaffold that implements routes, controllers, models, and tests so contributors can run, extend, and evaluate the sample application quickly.
+Uma API pequena em Express + TypeScript que demonstra autenticação e gestão de pedidos usando JWT, MongoDB e bcrypt. Este repositório é um esqueleto para desafios de código que implementa rotas, controllers, modelos e testes para que colaboradores possam executar, estender e avaliar a aplicação de exemplo rapidamente.
 
 ![version](https://img.shields.io/badge/version-1.0.0-blue) ![license](https://img.shields.io/badge/license-ISC-lightgrey)
 
-## Table of Contents
+## Índice
 
-- [What the project does](#what-the-project-does)
-- [Why this is useful](#why-this-is-useful)
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Configuration](#configuration)
+- [O que o projeto faz](#o-que-o-projeto-faz)
+- [Por que isso é útil](#por-que-isso-é-útil)
+- [Funcionalidades](#funcionalidades)
+- [Começando](#começando)
+- [Configuração](#configuração)
 - [Scripts](#scripts)
-- [Examples](#examples)
-- [Running tests](#running-tests)
-- [Where to get help](#where-to-get-help)
-- [Maintainers & Contributing](#maintainers--contributing)
+- [Exemplos](#exemplos)
+- [Executando testes](#executando-testes)
+- [Onde obter ajuda](#onde-obter-ajuda)
+- [Mantenedores e Contribuição](#mantenedores-e-contribuição)
 
-## What the project does
+## O que o projeto faz
 
-Linkio Challenge is a minimal REST API implemented with Express and TypeScript that includes user authentication (JWT) and basic order management. The codebase is intentionally small to make it easy to review and extend for interviews, tests, or learning purposes.
+Linkio Challenge é uma API REST mínima implementada com Express e TypeScript que inclui autenticação de usuário (JWT) e gestão básica de pedidos. O código é propositalmente enxuto para facilitar revisão e extensão em entrevistas, avaliações ou estudos.
 
-## Why this is useful
+## Por que isso é útil
 
-- Demonstrates a typical Node + TypeScript API structure.
-- Implements real-world concerns: authentication, password hashing, and MongoDB persistence.
-- Lightweight and easy to run locally for testing or evaluation.
+- Demonstra a estrutura típica de uma API Node + TypeScript.
+- Implementa preocupações do mundo real: autenticação, hash de senhas e persistência em MongoDB.
+- Leve e fácil de executar localmente para testes ou avaliação.
 
-## Features
+## Funcionalidades
 
-- JWT-based authentication and authorization
-- Password hashing with `bcrypt`/`bcryptjs`
-- Order model and controller
-- Organized TypeScript project structure (controllers, routes, models, middlewares)
+- Autenticação e autorização baseada em JWT
+- Hash de senha com `bcrypt`/`bcryptjs`
+- Modelo e controller de pedidos
+- Estrutura organizada em TypeScript (controllers, rotas, modelos, middlewares)
 
-## Getting Started
+## Começando
 
-Prerequisites:
+Pré-requisitos:
 
-- Node.js (v18+ recommended)
-- A running MongoDB instance (local or cloud)
+- Node.js (recomenda-se v18+)
+- Uma instância MongoDB em execução (local ou na nuvem)
 
-Clone and install:
+Clonar e instalar:
 
 ```bash
 git clone <repo-url>
@@ -49,60 +49,60 @@ cd linkio-challenge
 npm install
 ```
 
-Run in development (auto-reload with TypeScript):
+Executar em desenvolvimento (recarregamento automático com TypeScript):
 
 ```bash
 npm run dev
 ```
 
-Build and start (production):
+Build e iniciar (produção):
 
 ```bash
 npm run build
 npm start
 ```
 
-## Configuration
+## Configuração
 
-Create a `.env` file in the project root (example keys used by the app):
+Crie um arquivo `.env` na raiz do projeto (exemplo de variáveis usadas pela aplicação):
 
 ```
 PORT=3000
 MONGO_URI=mongodb://localhost:27017/linkio
-JWT_SECRET=your_jwt_secret_here
+JWT_SECRET=seu_segredo_jwt_aqui
 ```
 
-Adjust values as needed. The app reads configuration from `process.env` via `src/config/db.ts` and `src/server.ts`.
+Ajuste os valores conforme necessário. A aplicação lê a configuração de `process.env` via `src/config/db.ts` e `src/server.ts`.
 
 ## Scripts
 
-Available npm scripts (from `package.json`):
+Scripts npm disponíveis (conforme `package.json`):
 
 ```bash
-npm run dev    # Run with ts-node-dev for development
-npm run build  # Compile TypeScript to /dist
-npm start      # Start the compiled app from /dist
+npm run dev    # Executar com ts-node-dev para desenvolvimento
+npm run build  # Compilar TypeScript para /dist
+npm start      # Iniciar a aplicação compilada em /dist
 ```
 
-## Examples
+## Exemplos
 
-Common endpoints are organized under routes and controllers. See the source for details: [src/server.ts](src/server.ts), [src/app.ts](src/app.ts).
+Os endpoints comuns estão organizados em rotas e controllers. Veja o código-fonte para detalhes: [src/server.ts](src/server.ts), [src/app.ts](src/app.ts).
 
-Register / Login (example):
+Registro / Login (exemplo):
 
 ```bash
-# Register (example)
+# Registrar (exemplo)
 curl -X POST http://localhost:3000/auth/register \
   -H "Content-Type: application/json" \
   -d '{"email":"user@example.com","password":"secret"}'
 
-# Login (example)
+# Login (exemplo)
 curl -X POST http://localhost:3000/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"user@example.com","password":"secret"}'
 ```
 
-Create an order (authenticated):
+Criar um pedido (autenticado):
 
 ```bash
 curl -X POST http://localhost:3000/orders \
@@ -111,32 +111,32 @@ curl -X POST http://localhost:3000/orders \
   -d '{"item":"Widget","qty":2}'
 ```
 
-See route definitions in [src/routes](src/routes) and controller logic in [src/controllers](src/controllers).
+Veja as definições de rota em [src/routes](src/routes) e a lógica dos controllers em [src/controllers](src/controllers).
 
-## Running tests
+## Executando testes
 
-This repo includes a test file at [tests/order.test.ts](tests/order.test.ts). Tests use `vitest` which is included as a dependency.
+Este repositório inclui um arquivo de teste em [tests/order.test.ts](tests/order.test.ts). Os testes usam o `vitest`, que está listado nas dependências.
 
-Run tests via npx (or add a `test` script if you prefer):
+Execute os testes via npx (ou adicione um script `test` se preferir):
 
 ```bash
 npx vitest
 ```
 
-## Where to get help
+## Onde obter ajuda
 
-- Open an issue in this repository for bugs or questions.
-- Inspect source files and tests for usage examples: [tests/order.test.ts](tests/order.test.ts).
+- Abra uma issue neste repositório para bugs ou dúvidas.
+- Inspecione os arquivos fonte e os testes para exemplos de uso: [tests/order.test.ts](tests/order.test.ts).
 
-## Maintainers & Contributing
+## Mantenedores e Contribuição
 
-Maintainers: repository owners and collaborators. For contribution guidelines, see `docs/CONTRIBUTING.md` (if present) or open an issue to discuss changes.
+Mantenedores: proprietários do repositório e colaboradores. Para diretrizes de contribuição, veja `docs/CONTRIBUTING.md` (se presente) ou abra uma issue para discutir alterações.
 
-If you'd like me to add a `CONTRIBUTING.md`, CI configuration, or expand API docs, tell me which you'd prefer and I can scaffold them.
+Se quiser que eu adicione um `CONTRIBUTING.md`, configuração de CI, ou expanda a documentação da API, diga qual prefere e eu posso esboçar.
 
 ---
 
-File references:
+Referências de arquivos:
 
 - [src/server.ts](src/server.ts)
 - [src/app.ts](src/app.ts)
