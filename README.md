@@ -9,13 +9,13 @@ Uma API pequena em Express + TypeScript que demonstra autenticação e gestão d
 - [O que o projeto faz](#o-que-o-projeto-faz)
 - [Por que isso é útil](#por-que-isso-é-útil)
 - [Funcionalidades](#funcionalidades)
+- [Link da coleção no postman](https://joaotambue13-5b9e13d8-6940719.postman.co/workspace/Jo%C3%A3o-Tambue's-Workspace~b15be79e-f3b8-4795-80cd-4a893c76b3d7/collection/50982599-cb12ac20-9754-4366-b852-23ef4ffb0ff0?action=share&source=copy-link&creator=50982599)
 - [Começando](#começando)
 - [Configuração](#configuração)
 - [Scripts](#scripts)
 - [Exemplos](#exemplos)
 - [Executando testes](#executando-testes)
 - [Onde obter ajuda](#onde-obter-ajuda)
-- [Mantenedores e Contribuição](#mantenedores-e-contribuição)
 
 ## O que o projeto faz
 
@@ -68,7 +68,7 @@ Crie um arquivo `.env` na raiz do projeto (exemplo de variáveis usadas pela apl
 
 ```
 PORT=3000
-MONGO_URI=mongodb://localhost:27017/linkio
+MONGO_URI=mongodb://localhost:27017/exemplo
 JWT_SECRET=seu_segredo_jwt_aqui
 ```
 
@@ -127,12 +127,6 @@ npx vitest
 
 - Abra uma issue neste repositório para bugs ou dúvidas.
 - Inspecione os arquivos fonte e os testes para exemplos de uso: [tests/order.test.ts](tests/order.test.ts).
-
-## Mantenedores e Contribuição
-
-Mantenedores: proprietários do repositório e colaboradores. Para diretrizes de contribuição, veja `docs/CONTRIBUTING.md` (se presente) ou abra uma issue para discutir alterações.
-
-Se quiser que eu adicione um `CONTRIBUTING.md`, configuração de CI, ou expanda a documentação da API, diga qual prefere e eu posso esboçar.
 
 ---
 
