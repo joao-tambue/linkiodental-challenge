@@ -16,7 +16,6 @@ Uma API pequena em Express + TypeScript que demonstra autenticação e gestão d
 - [Exemplos](#exemplos)
 - [Executando testes](#executando-testes)
 - [Onde obter ajuda](#onde-obter-ajuda)
-
 ## O que o projeto faz
 
 Linkio Challenge é uma API REST mínima implementada com Express e TypeScript que inclui autenticação de usuário (JWT) e gestão básica de pedidos. O código é propositalmente enxuto para facilitar revisão e extensão em entrevistas, avaliações ou estudos.
