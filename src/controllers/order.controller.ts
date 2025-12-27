@@ -5,7 +5,6 @@ export const createOrder = async (req: Request, res: Response) => {
   try {
     const { lab, patient, customer, services } = req.body;
 
-    // Regra de negócio: serviços obrigatórios e valor total > 0
     if (!services || !Array.isArray(services) || services.length === 0) {
       return res.status(400).json({ message: 'O pedido deve ter pelo menos um serviço.' });
     }

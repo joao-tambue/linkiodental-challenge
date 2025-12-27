@@ -11,7 +11,6 @@ const userSchema = new Schema<IUser>({
   password: { type: String, required: true },
 });
 
-// Hash da senha antes de salvar
 userSchema.pre('save', async function(this: any) {
   if (!this.isModified('password')) return;
   this.password = await bcrypt.hash(this.password, 10);
