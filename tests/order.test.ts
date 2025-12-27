@@ -22,6 +22,6 @@ describe('Order business rules', () => {
     const flow = ['CREATED','ANALYSIS','COMPLETED'] as const;
     const currentIndex = flow.indexOf(order.state);
 
-    expect(currentIndex).toBe(flow.length - 1); // já está no final
+    expect(currentIndex).toBe(flow.length - 1);
   });
 });

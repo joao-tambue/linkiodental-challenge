@@ -2,29 +2,7 @@
 
 Uma API pequena em Express + TypeScript que demonstra autenticação e gestão de pedidos usando JWT, MongoDB e bcrypt. Este repositório é um esqueleto para desafios de código que implementa rotas, controllers, modelos e testes para que colaboradores possam executar, estender e avaliar a aplicação de exemplo rapidamente.
 
-![version](https://img.shields.io/badge/version-1.0.0-blue) ![license](https://img.shields.io/badge/license-ISC-lightgrey)
-
-## Índice
-
-- [O que o projeto faz](#o-que-o-projeto-faz)
-- [Por que isso é útil](#por-que-isso-é-útil)
-- [Funcionalidades](#funcionalidades)
 - [Link da coleção no postman](https://joaotambue13-5b9e13d8-6940719.postman.co/workspace/Jo%C3%A3o-Tambue's-Workspace~b15be79e-f3b8-4795-80cd-4a893c76b3d7/collection/50982599-cb12ac20-9754-4366-b852-23ef4ffb0ff0?action=share&source=copy-link&creator=50982599)
-- [Começando](#começando)
-- [Configuração](#configuração)
-- [Scripts](#scripts)
-- [Exemplos](#exemplos)
-- [Executando testes](#executando-testes)
-- [Onde obter ajuda](#onde-obter-ajuda)
-## O que o projeto faz
-
-Linkio Challenge é uma API REST mínima implementada com Express e TypeScript que inclui autenticação de usuário (JWT) e gestão básica de pedidos. O código é propositalmente enxuto para facilitar revisão e extensão em entrevistas, avaliações ou estudos.
-
-## Por que isso é útil
-
-- Demonstra a estrutura típica de uma API Node + TypeScript.
-- Implementa preocupações do mundo real: autenticação, hash de senhas e persistência em MongoDB.
-- Leve e fácil de executar localmente para testes ou avaliação.
 
 ## Funcionalidades
 
@@ -126,13 +104,3 @@ npx vitest
 
 - Abra uma issue neste repositório para bugs ou dúvidas.
 - Inspecione os arquivos fonte e os testes para exemplos de uso: [tests/order.test.ts](tests/order.test.ts).
-
----
-
-Referências de arquivos:
-
-- [src/server.ts](src/server.ts)
-- [src/app.ts](src/app.ts)
-- [src/controllers/auth.controller.ts](src/controllers/auth.controller.ts)
-- [src/controllers/order.controller.ts](src/controllers/order.controller.ts)
-- [tests/order.test.ts](tests/order.test.ts)
