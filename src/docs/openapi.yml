@@ -1,0 +1,280 @@
+openapi: 3.0.3
+info:
+  title: Linkio Challenge API
+  version: "1.0.0"
+  description: API para gerenciamento de pedidos, incluindo criação, atualização, exclusão e consulta de pedidos.
+servers:
+  - url: http://localhost:4000
+    description: Servidor local
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    Service:
+      type: object
+      required: [name, value, status]
+      properties:
+        name:
+          type: string
+        value:
+          type: number
+          format: double
+        status:
+          type: string
+          enum: [PENDING, DONE]
+    Order:
+      type: object
+      properties:
+        _id:
+          type: string
+        lab:
+          type: string
+        patient:
+          type: string
+        customer:
+          type: string
+        state:
+          type: string
+          enum: [CREATED, ANALYSIS, COMPLETED]
+        status:
+          type: string
+          enum: [ACTIVE, DELETED]
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    OrderCreate:
+      type: object
+      required: [lab, patient, customer, services]
+      properties:
+        lab:
+          type: string
+        patient:
+          type: string
+        customer:
+          type: string
+        services:
+          type: array
+          items:
+            type: object
+            required: [name, value, status]
+            properties:
+              name:
+                type: string
+              value:
+                type: number
+                format: double
+              status:
+                type: string
+                enum: [PENDING, DONE]
+    OrdersList:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: integer
+        limit:
+          type: integer
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+paths:
+  /auth/register:
+    post:
+      summary: Registra um novo usuário
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '201':
+          description: Usuário criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '400':
+          description: Requisição inválida (usuário já existe)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Erro interno
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/login:
+    post:
+      summary: Realiza login e retorna token JWT
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: Login bem-sucedido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '400':
+          description: Credenciais inválidas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Erro interno
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /orders:
+    post:
+      summary: Cria um novo pedido
+      tags: [Orders]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderCreate'
+      responses:
+        '201':
+          description: Pedido criado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Requisição inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Não autorizado
+    get:
+      summary: Lista pedidos (paginação e filtro por estado)
+      tags: [Orders]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 10
+        - in: query
+          name: state
+          schema:
+            type: string
+            enum: [CREATED, ANALYSIS, COMPLETED]
+      responses:
+        '200':
+          description: Lista de pedidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrdersList'
+        '401':
+          description: Não autorizado
+
+  /orders/{id}/advance:
+    patch:
+      summary: Avança o estado de um pedido
+      tags: [Orders]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Pedido avançado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  order:
+                    $ref: '#/components/schemas/Order'
+        '400':
+          description: Requisição inválida (não pode avançar)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Pedido não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Não autorizado
+
+tags:
+  - name: Auth
+    description: Endpoints de autenticação
+  - name: Orders
+    description: Endpoints para gerenciar pedidos
