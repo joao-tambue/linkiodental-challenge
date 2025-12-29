@@ -21,4 +21,15 @@ app.use(cors({
 app.use('/auth', authRoutes);
 app.use('/orders', orderRoutes);
 
+try {
+	const swaggerUi = require('swagger-ui-express');
+	const YAML = require('yamljs');
+	const path = require('path');
+	const openapiPath = path.join(__dirname, 'docs', 'openapi.yml');
+	const swaggerDocument = YAML.load(openapiPath);
+	app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+} catch (err) {
+	console.warn('Swagger UI não está disponível. Rode `npm install swagger-ui-express yamljs` para habilitar.');
+}
+
 export default app;
