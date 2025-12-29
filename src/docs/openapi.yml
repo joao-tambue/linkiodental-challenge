@@ -204,7 +204,7 @@ paths:
         '401':
           description: Não autorizado
     get:
-      summary: Lista pedidos (paginação e filtro por estado)
+      summary: Lista pedidos (com paginação e filtro por estado)
       tags: [Orders]
       security:
         - bearerAuth: []
@@ -259,7 +259,7 @@ paths:
                   order:
                     $ref: '#/components/schemas/Order'
         '400':
-          description: Requisição inválida (não pode avançar)
+          description: Requisição inválida (pedido já está em COMPLETED)
           content:
             application/json:
               schema:
@@ -275,6 +275,6 @@ paths:
 
 tags:
   - name: Auth
-    description: Endpoints de autenticação
+    description: Endpoints para autenticação de usuários
   - name: Orders
-    description: Endpoints para gerenciar pedidos
+    description: Endpoints para gerenciamento de pedidos
