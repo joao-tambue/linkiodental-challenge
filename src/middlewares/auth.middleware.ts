@@ -2,7 +2,11 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from '../utils/jwt';
 import User from '../models/user';
 
-export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+export const authMiddleware = async (
+  req: Request,
+  res: Response, 
+  next: NextFunction
+) => {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({ message: 'Token ausente' });
