@@ -11,6 +11,23 @@ Uma API pequena em Express + TypeScript que demonstra autenticação e gestão d
 - Modelo e controller de pedidos
 - Estrutura organizada em TypeScript (controllers, rotas, modelos, middlewares)
 
+## Tecnologias usadas
+
+<div align="center">
+
+| Technology              | Descrição                                                                 | Icon                                                                                          |
+| ----------------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| **Node.js**             | Runtime JavaScript assíncrono e orientado a eventos para backend escalável | ![Node.js](https://img.shields.io/badge/-Node.js-05122A?style=flat&logo=node.js)              |
+| **TypeScript**          | Superset do JavaScript com tipagem estática para maior segurança e escala | ![TypeScript](https://img.shields.io/badge/-TypeScript-05122A?style=flat&logo=typescript)    |
+| **Express**             | Framework minimalista para criação de APIs REST rápidas e eficientes      | ![Express](https://img.shields.io/badge/-Express-05122A?style=flat&logo=express)              |
+| **MongoDB**             | Banco de dados NoSQL orientado a documentos, flexível e performático      | ![MongoDB](https://img.shields.io/badge/-MongoDB-05122A?style=flat&logo=mongodb)              |
+| **JWT Authentication**  | Autenticação stateless baseada em tokens para APIs seguras                | ![JWT](https://img.shields.io/badge/-JWT-05122A?style=flat&logo=jsonwebtokens)                |
+| **Swagger / OpenAPI**   | Documentação interativa e padronizada para APIs REST                       | ![Swagger](https://img.shields.io/badge/-Swagger-05122A?style=flat&logo=swagger)              |
+
+</div>
+
+---
+
 ## Começando
 
 Pré-requisitos:
@@ -21,12 +38,12 @@ Pré-requisitos:
 Clonar e instalar:
 
 ```bash
-git clone <repo-url>
-cd linkio-challenge
+git clone https://github.com/joao-tambue/linkiodental-challenge.git
+cd linkiodental-challenge
 npm install
 ```
 
-Executar em desenvolvimento (recarregamento automático com TypeScript):
+Executar em desenvolvimento
 
 ```bash
 npm run dev
@@ -61,34 +78,10 @@ npm run build  # Compilar TypeScript para /dist
 npm start      # Iniciar a aplicação compilada em /dist
 ```
 
-## Exemplos
+## Acesso ao docs e a api localmente
 
-Os endpoints comuns estão organizados em rotas e controllers. Veja o código-fonte para detalhes: [src/server.ts](src/server.ts), [src/app.ts](src/app.ts).
-
-Registro / Login (exemplo):
-
-```bash
-# Registrar (exemplo)
-curl -X POST http://localhost:3000/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"email":"user@example.com","password":"secret"}'
-
-# Login (exemplo)
-curl -X POST http://localhost:3000/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"user@example.com","password":"secret"}'
-```
-
-Criar um pedido (autenticado):
-
-```bash
-curl -X POST http://localhost:3000/orders \
-  -H "Authorization: Bearer <TOKEN>" \
-  -H "Content-Type: application/json" \
-  -d '{"item":"Widget","qty":2}'
-```
-
-Veja as definições de rota em [src/routes](src/routes) e a lógica dos controllers em [src/controllers](src/controllers).
+  - **API**: http://localhost:4000
+  - **Documentação (Swagger)**: http://localhost:4000/docs
 
 ## Executando testes
 
