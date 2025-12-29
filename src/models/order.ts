@@ -25,9 +25,20 @@ const orderSchema = new Schema<IOrder>({
   lab: { type: String, required: true },
   patient: { type: String, required: true },
   customer: { type: String, required: true },
-  state: { type: String, enum: ['CREATED','ANALYSIS','COMPLETED'], default: 'CREATED' },
-  status: { type: String, enum: ['ACTIVE','DELETED'], default: 'ACTIVE' },
-  services: { type: [serviceSchema], required: true },
+  state: { 
+    type: String, 
+    enum: ['CREATED','ANALYSIS','COMPLETED'], 
+    default: 'CREATED' 
+  },
+  status: { 
+    type: String, 
+    enum: ['ACTIVE','DELETED'], 
+    default: 'ACTIVE' 
+  },
+  services: { 
+    type: [serviceSchema], 
+    required: true 
+  },
 }, { timestamps: true });
 
 export default model<IOrder>('Order', orderSchema);
