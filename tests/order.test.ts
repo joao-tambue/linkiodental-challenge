@@ -18,8 +18,16 @@ describe('Order business rules', () => {
   });
 
   it('should not allow advancing from COMPLETED', () => {
-    const order: any = { state: 'COMPLETED', status: 'ACTIVE', save: async () => {} };
-    const flow = ['CREATED','ANALYSIS','COMPLETED'] as const;
+    const order: any = { 
+      state: 'COMPLETED', 
+      status: 'ACTIVE', 
+      save: async () => {} 
+    };
+    const flow = [
+      'CREATED',
+      'ANALYSIS',
+      'COMPLETED'
+    ] as const;
     const currentIndex = flow.indexOf(order.state);
 
     expect(currentIndex).toBe(flow.length - 1);
